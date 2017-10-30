@@ -1,5 +1,5 @@
 from . import auth
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required
 from ..models import User
 from .forms import LoginForm, RegistrationForm
@@ -17,7 +17,7 @@ def login():
         flash('Invalid username or password')
 
     title = "Login"
-    return render_template('auth/login.html')
+    return render_template('auth/login.html', login_form = login_form)
 
 @auth.route('/register', methods = ["GET", "POST"])
 def register():
