@@ -2,8 +2,9 @@ import os
 
 class Config:
     '''
-    general configuration; put database url here
+    general configuration
     '''
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gitu_m:sqlpass@localhost/pitchsite'
 
 class ProdConfig:
     '''
