@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
+{% import 'macros.html' as macro %}
 <!-- styles block -->
 
 <!-- content block -->
 {% block content %}
-    <h1>It works!</h1>
-{% endblock%}
+    <div class="container-fluid">
+        <ul style="display:inline-block">
+            {{macro.displayCategories(category)}}
+        </ul>
+    </div>
+{% endblock %}
