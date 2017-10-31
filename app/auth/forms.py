@@ -4,7 +4,9 @@ from wtforms.validators import Required, Email, EqualTo
 from ..models import User
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Enter your username', validators = [Required()])
+    first_name = StringField('Enter your First Name', validators = [Required()])
+    last_name = StringField('Enter your Last Name', validators = [Required()])
+    username = StringField('Enter a username', validators = [Required()])
     email = StringField('Your Email Address', validators = [Required(), Email()])
     password = PasswordField('Password', validators = [Required(),
     EqualTo('password_confirm', message = 'Passwords must match')])
