@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for
 from . import main
-from .forms import PitchForm
+from .forms import PitchForm, ReviewForm
 from ..models import Category, Pitch, Review
 from flask_login import login_required
 
@@ -41,4 +41,22 @@ def new_pitch(id):
         new_pitch.save_pitch()  
         return redirect(url_for('.category', id = category.id))
     title = f'{category.name} pitches'
-    return render_template('new_pitch.html', title = title, pitch_form = form, category = category)
+    return render_template('new_pitch.html', title = title, pitch_form = form, category = category, user = current_user)
+
+@main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
+@login_required
+def new_review(id):
+    form = ReviewForm()
+    pitch = Pitch.query.filter_by(id = id).first()
+    if form.validate_on_submit():
+        review = form.review.data
+
+        # review instance
+        new_review = Review(pitch_id = pitch.id, title = title, review=review, user = current_user)
+
+        # save review 
+        new_review.save_review()
+        return redirect(url_for('.pitch', id = pitch.id ))
+
+    title = f'{pitch.title} review'
+    return render_template('new_review.html', title = title, review_form=form, pitch = pitch)

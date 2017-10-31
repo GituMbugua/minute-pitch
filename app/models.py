@@ -83,3 +83,12 @@ class Review(db.Model):
     time = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+
+    def save_review(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_reviews(cls, id):
+        reviews = Review.query.filter_by(pitch_id=id).all()
+        return reviews
