@@ -61,7 +61,6 @@ class Pitch(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(255), index = True)
     post = db.Column(db.String(300), index = True)
-    vote = db.Column(db.Integer)
     time = db.Column(db.DateTime, default = datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
@@ -72,7 +71,7 @@ class Pitch(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_reviews(cls, id):
+    def get_pitches(cls, id):
         pitches = Pitch.query.filter_by(category_id = id).all()
         return pitches
 
