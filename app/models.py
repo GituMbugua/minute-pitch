@@ -11,9 +11,11 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key = True)
+    first_name = db.Column(db.String(255), index = True)
+    last_name = db.Column(db.String(255), index = True)
     username = db.Column(db.String(255), index = True)
     email = db.Column(db.String(255), unique = True, index = True)
-    password_hash = db.Column(db.String(255))
+    password_hash = db.Column(db.String(255))   
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     pitches =  db.relationship('Pitch', backref = 'user', lazy = "dynamic")
 
@@ -23,10 +25,10 @@ class User(UserMixin, db.Model):
 
     @password.setter
     def password(self, password):
-        self.pass_secure = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.pass_secure, password)
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return f'User {self.username}'
@@ -48,6 +50,11 @@ class Category(db.Model):
     name = db.Column(db.String(255), index = True)
     pitches = db.relationship('Pitch', backref = 'category', lazy = "dynamic")
 
+    @classmethod
+    def get_categories(cls):
+        categories = Category.query.all()
+        return categories
+
 class Pitch(db.Model):
     __tablename__ = 'pitches'
 
@@ -59,6 +66,15 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
     reviews = db.relationship('Review', backref = 'pitch', lazy = "dynamic")
+
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_reviews(cls, id):
+        pitches = Pitch.query.filter_by(category_id = id).all()
+        return pitches
 
 class Review(db.Model):
     __tablename__ = 'reviews'
