@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{% block content %}
+    <div class="container">
+        {% if review %}
+            <ul>
+                {{ macro.displayReviews(review) }}
+            </ul>
+        {% else %}
+            <h3>This pitch has no reviews</h3>
+        {% endif %}
+        <a href="/pitch/review/new/{{pitch.id}}">Create a Review</a>
+    </div>
+{% endblock %}
