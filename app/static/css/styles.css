@@ -1,8 +1,5 @@
-html {
-    height: 93%;
-}
-body {
-    height: 93vh;
+html, body {
+    height: 100%;
 }
 
 /* index.html */
@@ -66,18 +63,18 @@ body {
 
 /* category.html */
 .well {
+    background-color: white;
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 1%;
     width: 355px;
-    background-color: white;
 }
 #category-head {
     background-image: url("/static/img/orange_triangles.png");
     background-repeat: no-repeat;
     width: 100%;
     margin-top: 0%;
-    position: relative;
+    position: auto;
     text-align: center;
     padding-bottom: 4%;
     padding-left: 2%;
@@ -87,9 +84,19 @@ body {
 }
 .category-container {
     background-color: rgb(231, 239, 253);
-    height: 93vh;
+    height: 100%;
     padding: 0%;
 }
 #category-cards {
     margin-left: 2%;
+}
+.pitch-content {
+    padding: 2%;
+}
+#avatar-column {
+    margin-right: 4%;
+}
+#avatar {
+    height: 65px;
+    width: 65px;
 }
