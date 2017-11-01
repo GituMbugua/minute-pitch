@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for
 from . import main
 from .forms import PitchForm, ReviewForm
 from ..models import Category, Pitch, Review
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 @main.route('/')
 def index():
@@ -28,6 +28,9 @@ def category(id):
 @main.route('/category/pitch/new/<int:id>', methods = ["GET", "POST"])
 @login_required
 def new_pitch(id):
+    '''
+    view category that returns a form to create a pitch
+    '''
     form = PitchForm()
     category = Category.query.filter_by(id = id).first()
     if form.validate_on_submit():
@@ -35,28 +38,42 @@ def new_pitch(id):
         post = form.post.data
 
         # pitch instance
-        new_pitch = Pitch(category_id = category.id, title = title, post = post)
+        new_pitch = Pitch(category_id = category.id, title = title, post = post, user = current_user)
 
         # save pitch
         new_pitch.save_pitch()  
         return redirect(url_for('.category', id = category.id))
     title = f'{category.name} pitches'
-    return render_template('new_pitch.html', title = title, pitch_form = form, category = category, user = current_user)
+    return render_template('new_pitch.html', title = title, pitch_form = form, category = category)
 
 @main.route('/pitch/review/new/<int:id>', methods = ['GET','POST'])
 @login_required
 def new_review(id):
+    '''
+    view category that returns a form to create a new review
+    '''
     form = ReviewForm()
     pitch = Pitch.query.filter_by(id = id).first()
     if form.validate_on_submit():
         review = form.review.data
 
         # review instance
-        new_review = Review(pitch_id = pitch.id, title = title, review=review, user = current_user)
+        new_review = Review(pitch_id = pitch.id, post_review = review)
 
         # save review 
         new_review.save_review()
-        return redirect(url_for('.pitch', id = pitch.id ))
+        return redirect(url_for('.reviews', id = pitch.id ))
 
     title = f'{pitch.title} review'
     return render_template('new_review.html', title = title, review_form=form, pitch = pitch)
+
+@main.route('/pitch/reviews/<int:id>')
+def reviews(id):
+    '''
+    viw category that returns all reviews for a pitch
+    '''
+    pitch = Pitch.query.get(id)
+    review = Review.get_reviews(pitch.id)
+    title = f'{pitch.title} review'
+
+    return render_template('reviews.html', title = title, pitch = pitch, review = review)
