@@ -1,14 +1,14 @@
 {% macro displayCategories(category_list) %}
     {% for category in category_list %}
-        <li class="text-center">
-            <a href="/category/{{category.id}}"><h2>{{category.name}}</h2></a>
+        <li id="categories">
+            <a class="category-button btn btn-default" href="/category/{{category.id}}"><h3>{{category.name}}</h3></a>
         </li>
     {% endfor %}
 {% endmacro %}
 
 {% macro displayPitches(pitch_list) %}
     {% for pitch in pitch_list %}
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 pitch-card">
+        <div class="well col-xs-12 col-sm-4 col-md-4 col-lg-4 pitch-card">
             <h4> {{pitch.title}}</h4>
             <p> {{pitch.post}}</p>
         </div>

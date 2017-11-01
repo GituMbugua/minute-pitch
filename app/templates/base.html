@@ -1,5 +1,12 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block styles %} 
+  {{ super() }}
+
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/styles.css')}}"> 
+
+{% endblock %}
+
 <!-- navbar -->
 {% block navbar %}
     {% include 'navbar.html' %}
