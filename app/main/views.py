@@ -58,14 +58,14 @@ def new_review(id):
         review = form.review.data
 
         # review instance
-        new_review = Review(pitch_id = pitch.id, post_review = review)
+        new_review = Review(pitch_id = pitch.id, post_review = review, user = current_user)
 
         # save review 
         new_review.save_review()
         return redirect(url_for('.reviews', id = pitch.id ))
 
     title = f'{pitch.title} review'
-    return render_template('new_review.html', title = title, review_form=form, pitch = pitch)
+    return render_template('new_review.html', title = title, review_form = form, pitch = pitch)
 
 @main.route('/pitch/reviews/<int:id>')
 def reviews(id):
