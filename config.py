@@ -6,7 +6,6 @@ class Config:
     '''
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gitu_m:sqlpass@localhost/pitchsite'
 
 class ProdConfig(Config):
     '''
@@ -18,7 +17,7 @@ class DevConfig(Config):
     '''
     development configuration child class
     '''
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gitu_m:sqlpass@localhost/pitchsite'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gitu_m:sqlpass@localhost/pitchsite'
     DEBUG = True
 
 config_options = {
