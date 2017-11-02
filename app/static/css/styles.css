@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
 }
+ 
 
 /* index.html */
 #index-container {
@@ -99,4 +100,27 @@ html, body {
 #avatar {
     height: 65px;
     width: 65px;
+}
+
+/* review.html */
+
+.panel-footer {
+    background-color: white;
+}
+.reviews {
+    width: 100%;
+    margin-top: 2%;
+}
+.reviews-list {
+    list-style: none;
+    width: 100%;
+}
+
+
+/* auth templates */
+.form-panel {
+    margin-top: 2%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
 }

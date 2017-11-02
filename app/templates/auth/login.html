@@ -4,9 +4,11 @@
 {% block content %}
 
 <div class="container">
-  {{wtf.quick_form(login_form)}}
-
-  <h4>If you do not have an account, <a href="/authenticate/register">Sign Up</a> here.</h4>
+  <div class="panel form-panel">
+      {{wtf.quick_form(login_form)}}
+      
+      <h4>If you do not have an account, <a href="/authenticate/register">Sign Up</a> here.</h4>
+  </div>
  </div>
 
 {% endblock %}

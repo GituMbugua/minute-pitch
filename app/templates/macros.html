@@ -29,8 +29,11 @@
 
 {% macro displayReviews(review_list) %}
     {% for review in review_list %}
-        <li>
-            {{review.post_review}}
-        </li>
+        <div class="well reviews-well">
+            <li>
+                <h3>{{review.post_review}}</h3>
+                <p>by {{review.user.username}}</p>
+            </li>
+        </div>
     {% endfor %}
 {% endmacro %}

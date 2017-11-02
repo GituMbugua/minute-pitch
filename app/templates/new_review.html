@@ -3,7 +3,8 @@
 
 {% block content %}
     <div class="container">
-        {{ wtf.quick_form(review_form) }}
+        <div class="panel form-panel">
+            {{ wtf.quick_form(review_form) }}                
+        </div>
     </div>
-
 {% endblock %}
