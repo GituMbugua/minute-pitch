@@ -27,7 +27,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        return redirect(url_for('main.index'))
+        return redirect(url_for('.login'))
         flash('Your account was registered successfully. You can now log in.')
         
     title = "New Account"
